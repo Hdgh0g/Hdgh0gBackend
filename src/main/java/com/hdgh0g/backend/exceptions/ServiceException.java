@@ -27,7 +27,6 @@ public class ServiceException extends Exception {
     @Getter
     public enum Reason {
         NOT_AUTHORIZED("You are not authorized", "Check credentials"),
-        POST_NOT_FOUND("Post not fount", "There is no post with this id on server"),
         CANT_SAVE_IMAGE("Cant save image", "Bad format or write error");
 
 
