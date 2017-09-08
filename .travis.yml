@@ -1,0 +1,23 @@
+language: java
+jdk: oraclejdk8
+sudo: required
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+services:
+  - postgresql
+  - docker
+before_script:
+  - psql -c "create database hdgh0g_test;" -U postgres
+  - psql -c "create user test_user with password 'q1w2e3sedama';" -U postgres
+  - psql -c "grant all privileges on database hdgh0g_test to test_user;" -U postgres
+  - chmod 777 .travis/deploy_dockerhub.sh
+script:
+  - chmod 777 ./gradlew
+  - ./gradlew build
+  - cp ./build/libs/Hdgh0gBackend-0.0.1-SNAPSHOT.jar ./backend.jar
+  - sh ./.travis/deploy_dockerhub.sh hdgh0g.com_backend
+
+notifications:
+  email: false
