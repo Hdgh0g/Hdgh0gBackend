@@ -1,0 +1,56 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.M3'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.spring.io/snapshot" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.1'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-cache')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-validation')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.flywaydb:flyway-core')
+    compile('org.springframework.retry:spring-retry')
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    // https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib
+    compile group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+
+    runtime('org.postgresql:postgresql')
+    compileOnly('org.projectlombok:lombok')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    // https://mvnrepository.com/artifact/com.jayway.restassured/rest-assured
+    testCompile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.9.0'
+    // https://mvnrepository.com/artifact/com.jayway.restassured/spring-mock-mvc
+    testCompile group: 'com.jayway.restassured', name: 'spring-mock-mvc', version: '2.9.0'
+}

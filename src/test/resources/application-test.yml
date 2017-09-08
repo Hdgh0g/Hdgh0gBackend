@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    username: test_user
+    password: q1w2e3sedama
+    url: jdbc:postgresql://localhost:5432/hdgh0g_test
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+storage:
+  prefix: file://${java.io.tmpdir}/hdgh0g_tests/
+  directory: ${java.io.tmpdir}/hdgh0g_tests/
+  filename:
+    length: 32
+
+security:
+  admin:
+    password: 123456
+
+image:
+  size:
+    full: 50
+    thumb: 20

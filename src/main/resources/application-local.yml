@@ -1,0 +1,35 @@
+spring:
+  main:
+    banner-mode: "off"
+  mvc:
+    favicon:
+      enabled: false
+  datasource:
+    username: app_user
+    password: q1w2e3sedama
+    url: jdbc:postgresql://localhost:5432/hdgh0g
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+security:
+  admin:
+    password: 123456
+
+server:
+  port: 9000
+
+storage:
+  prefix: http://localhost/
+  directory: ${user.home}\Dropbox\Usefull\hdgh0g_static
+  filename:
+    length: 32
+
+image:
+  size:
+    full: 1500
+    thumb: 500
