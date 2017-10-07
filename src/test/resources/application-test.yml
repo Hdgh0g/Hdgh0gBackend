@@ -15,7 +15,8 @@ storage:
 
 security:
   admin:
-    password: 123456
+    password:
+     raw: 123456
 
 image:
   size:

@@ -11,13 +11,13 @@ spring:
 security:
   admin:
     password:
-      raw: 123456
+      file: adminpass
 
 server:
   port: 9000
 
 storage:
-  prefix: http://localhost/
-  directory: ${user.home}\Dropbox\Usefull\hdgh0g_static
+  prefix: http://static.hdgh0g.com/
+  directory: $/home/backend/storage
   filename:
     length: 32

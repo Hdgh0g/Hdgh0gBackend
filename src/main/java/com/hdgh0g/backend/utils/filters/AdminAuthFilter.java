@@ -8,17 +8,30 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 @Component
 public class AdminAuthFilter extends OncePerRequestFilter {
 
-    @Value("${security.admin.password}")
+    @Value("${security.admin.password.raw:}")
     private String adminPassword;
+
+    @Value("${security.admin.password.file:}")
+    private String adminPasswordFile;
+
+    @PostConstruct
+    public void init() throws IOException {
+        if (adminPasswordFile != null) {
+            adminPassword = Files.lines(new File(adminPasswordFile).toPath()).findFirst().orElse(adminPassword);
+        }
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

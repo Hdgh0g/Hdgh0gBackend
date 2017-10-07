@@ -19,6 +19,12 @@ apply plugin: "io.spring.dependency-management"
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+bootJar {
+    launchScript {
+        included = true
+    }
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '4.1'
 }

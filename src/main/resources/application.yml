@@ -1,3 +1,16 @@
 spring:
   profiles:
     active: local
+  main:
+    banner-mode: "off"
+  mvc:
+    favicon:
+      enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+image:
+  size:
+    full: 1500
+    thumb: 500
