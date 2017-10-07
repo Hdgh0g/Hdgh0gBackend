@@ -1,16 +1,23 @@
 language: java
 services:
   - postgresql
+addons:
+  ssh_known_hosts: hdgh0g.com
 before_install:
  - chmod +x gradlew
 before_script:
   - psql -c "create database hdgh0g_test;" -U postgres
   - psql -c "create user test_user with password 'q1w2e3sedama';" -U postgres
   - psql -c "grant all privileges on database hdgh0g_test to test_user;" -U postgres
+
+  - openssl aes-256-cbc -K $encrypted_e7f0ed2dace1_key -iv $encrypted_e7f0ed2dace1_iv -out /tmp/deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 /tmp/deploy_rsa
+  - ssh-add /tmp/deploy_rsa
 script:
   - ./gradlew build
-  - ssh travis@hdgh0g.com "sudo systemctl backend stop"
+  - ssh travis@hdgh0g.com "sudo systemctl stop backend"
   - scp ./build/libs/Hdgh0gBackend-0.0.1-SNAPSHOT.jar hdgh0g.com:/opt/backend/backend.jar
-  - ssh travis@hdgh0g.com "sudo systemctl backend start"
+  - ssh travis@hdgh0g.com "sudo systemctl start backend"
 notifications:
   email: false
