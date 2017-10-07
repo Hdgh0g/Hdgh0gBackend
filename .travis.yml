@@ -1,16 +1,16 @@
 language: java
 services:
   - postgresql
+before_install:
+ - chmod +x gradlew
 before_script:
   - psql -c "create database hdgh0g_test;" -U postgres
   - psql -c "create user test_user with password 'q1w2e3sedama';" -U postgres
   - psql -c "grant all privileges on database hdgh0g_test to test_user;" -U postgres
 script:
-  - chmod 777 ./gradlew
   - ./gradlew build
   - ssh travis@hdgh0g.com "sudo systemctl backend stop"
   - scp ./build/libs/Hdgh0gBackend-0.0.1-SNAPSHOT.jar hdgh0g.com:/opt/backend/backend.jar
   - ssh travis@hdgh0g.com "sudo systemctl backend start"
-
 notifications:
   email: false
