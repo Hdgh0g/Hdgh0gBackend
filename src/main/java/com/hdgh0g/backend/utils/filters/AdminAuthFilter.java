@@ -27,9 +27,14 @@ public class AdminAuthFilter extends OncePerRequestFilter {
     private String adminPasswordFile;
 
     @PostConstruct
-    public void init() throws IOException {
+    public void init() {
         if (adminPasswordFile != null) {
-            adminPassword = Files.lines(new File(adminPasswordFile).toPath()).findFirst().orElse(adminPassword);
+            try {
+                adminPassword = Files.lines(new File(adminPasswordFile).toPath()).findFirst().orElse(adminPassword);
+            } catch (IOException e) {
+                logger.error("Error while trying to read admin password file " + adminPasswordFile, e);
+                throw new RuntimeException(e);
+            }
         }
     }
 
