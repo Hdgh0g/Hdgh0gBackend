@@ -1,5 +1,6 @@
 package com.hdgh0g.backend.controllers;
 
+import com.hdgh0g.backend.config.PropertiesConfig;
 import com.hdgh0g.backend.config.SecurityConfig;
 import com.hdgh0g.backend.config.jackson.JacksonConfig;
 import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
@@ -12,7 +13,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.test.web.servlet.MockMvc;
 
 @TestConfiguration
-@Import({JacksonConfig.class, SecurityConfig.class})
+@Import({
+        JacksonConfig.class,
+        SecurityConfig.class,
+        PropertiesConfig.class
+})
 public class TestMvcConfiguration {
 
     @Autowired
