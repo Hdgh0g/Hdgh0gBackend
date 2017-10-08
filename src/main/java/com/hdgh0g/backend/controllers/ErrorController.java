@@ -22,12 +22,4 @@ public class ErrorController {
         throw new ApiException(new ServiceException(NOT_AUTHORIZED), HttpStatus.FORBIDDEN);
     }
 
-    @ExceptionHandler(Exception.class)
-    @JsonView(ErrorView.DefaultView.class)
-    public ResponseEntity<ApiException> handleException(Exception e) {
-        ApiException apiException;
-        apiException = e instanceof ApiException ? (ApiException) e : new ApiException(e);
-        return new ResponseEntity<>(apiException, apiException.getStatus());
-    }
-
 }

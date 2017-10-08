@@ -1,6 +1,10 @@
 package com.hdgh0g.backend.utils.filters;
 
+import com.hdgh0g.backend.exceptions.ServiceException;
+import com.hdgh0g.backend.services.AdminManager;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,25 +22,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 @Component
+@RequiredArgsConstructor
 public class AdminAuthFilter extends OncePerRequestFilter {
 
-    @Value("${security.admin.password.raw:}")
-    private String adminPassword;
-
-    @Value("${security.admin.password.file:}")
-    private String adminPasswordFile;
-
-    @PostConstruct
-    public void init() {
-        if (adminPasswordFile != null) {
-            try {
-                adminPassword = Files.lines(new File(adminPasswordFile).toPath()).findFirst().orElse(adminPassword);
-            } catch (IOException e) {
-                logger.error("Error while trying to read admin password file " + adminPasswordFile, e);
-                throw new RuntimeException(e);
-            }
-        }
-    }
+    private final AdminManager adminManager;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -63,8 +52,12 @@ public class AdminAuthFilter extends OncePerRequestFilter {
     }
 
     private boolean isValid(String password) {
-        //noinspection ConstantConditions
-        return adminPassword != null && adminPassword.equals(password);
+        try {
+            adminManager.checkPassword(password);
+            return true;
+        } catch (ServiceException e) {
+            return false;
+        }
     }
 
 }

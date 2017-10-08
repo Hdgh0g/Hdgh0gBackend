@@ -40,17 +40,19 @@ public class ApiException extends Exception {
         return data.toString();
     }
 
-    public ApiException() {
-        title = "Api Exception";
+    private ApiException() {
         description = "Default api exception without correct description";
-        status = HttpStatus.BAD_REQUEST;
+        status = HttpStatus.INTERNAL_SERVER_ERROR;
+        title = status.getReasonPhrase();
     }
 
     public ApiException(Exception e) {
-        title = "Api Exception";
-        description = "Default api exception without correct description";
-        status = HttpStatus.BAD_REQUEST;
-        data = Optional.of(e);
+        this();
+        data = e;
+    }
+
+    public ApiException(ServiceException e) {
+        this(e, HttpStatus.BAD_REQUEST);
     }
 
     public ApiException(ServiceException e, HttpStatus status) {

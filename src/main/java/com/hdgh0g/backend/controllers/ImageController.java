@@ -32,7 +32,7 @@ public class ImageController {
         try {
             return imageManager.CreateImageWithCaption(file, caption);
         } catch (ServiceException e) {
-            throw new ApiException(e, HttpStatus.BAD_REQUEST);
+            throw new ApiException(e);
         }
     }
 
