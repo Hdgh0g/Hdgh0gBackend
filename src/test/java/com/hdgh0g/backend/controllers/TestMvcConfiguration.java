@@ -3,6 +3,8 @@ package com.hdgh0g.backend.controllers;
 import com.hdgh0g.backend.config.PropertiesConfig;
 import com.hdgh0g.backend.config.SecurityConfig;
 import com.hdgh0g.backend.config.jackson.JacksonConfig;
+import com.hdgh0g.backend.exceptions.ServiceException;
+import com.hdgh0g.backend.services.AdminManager;
 import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
 import com.jayway.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,15 @@ public class TestMvcConfiguration {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Bean
+    public AdminManager adminManager() {
+        return new AdminManager() {
+            @Override
+            public void checkPassword(String password) throws ServiceException {
+            }
+        };
+    }
 
     @Bean
     @Scope("prototype")
