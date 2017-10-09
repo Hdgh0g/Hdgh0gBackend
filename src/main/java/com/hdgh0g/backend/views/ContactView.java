@@ -1,17 +1,25 @@
 package com.hdgh0g.backend.views;
 
-public interface ContactView {
+import com.hdgh0g.backend.domain.Contact;
+import lombok.Getter;
+import lombok.Setter;
 
-    interface DefaultView extends
-            IdView,
-            TitleView,
-            DescriptionView,
-            UrlView,
-            ImageView {}
+@Getter
+@Setter
+public class ContactView {
 
-    interface IdView {}
-    interface TitleView {}
-    interface DescriptionView {}
-    interface UrlView {}
-    interface ImageView extends com.hdgh0g.backend.views.ImageView.DefaultView {}
+    private Long id;
+    private String title;
+    private String description;
+    private String url;
+    private ImageView image;
+
+    public ContactView(Contact contact) {
+        this.id = contact.getId();
+        this.title = contact.getTitle();
+        this.description = contact.getDescription();
+        this.url = contact.getUrl();
+        this.image = new ImageView(contact.getImage());
+    }
+
 }

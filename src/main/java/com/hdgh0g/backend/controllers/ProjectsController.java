@@ -1,7 +1,6 @@
 package com.hdgh0g.backend.controllers;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.hdgh0g.backend.domain.Project;
+import com.google.common.collect.Lists;
 import com.hdgh0g.backend.services.ProjectsManager;
 import com.hdgh0g.backend.views.ProjectView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,7 @@ public class ProjectsController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    @JsonView(ProjectView.DefaultView.class)
-    public List<Project> getProjects() {
-        return projectsManager.getProjects();
+    public List<ProjectView> getProjects() {
+        return Lists.transform(projectsManager.getProjects(), ProjectView::new);
     }
 }

@@ -1,6 +1,6 @@
 package com.hdgh0g.backend.config;
 
-import com.hdgh0g.backend.utils.filters.AdminAuthFilter;
+import com.hdgh0g.backend.filters.AdminAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

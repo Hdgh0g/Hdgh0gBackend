@@ -1,13 +1,9 @@
 package com.hdgh0g.backend.controllers;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.hdgh0g.backend.exceptions.ApiException;
 import com.hdgh0g.backend.exceptions.ServiceException;
-import com.hdgh0g.backend.views.ErrorView;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

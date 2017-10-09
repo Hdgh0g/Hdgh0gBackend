@@ -1,13 +1,22 @@
 package com.hdgh0g.backend.views;
 
-public interface ImageView {
+import com.hdgh0g.backend.domain.Image;
+import lombok.Getter;
+import lombok.Setter;
 
-    interface DefaultView extends
-            IdView,
-            UrlView,
-            ThumbnailUrlView {}
+@Getter
+@Setter
+public class ImageView {
 
-    interface IdView{}
-    interface UrlView{}
-    interface ThumbnailUrlView{}
+    public static String STORAGE_PREFIX;
+
+    private Long id;
+    private String url;
+    private String thumbnailUrl;
+
+    public ImageView(Image image) {
+        this.id = image.getId();
+        this.url = STORAGE_PREFIX + image.getUrl();
+        this.thumbnailUrl = STORAGE_PREFIX + image.getThumbnailUrl();
+    }
 }

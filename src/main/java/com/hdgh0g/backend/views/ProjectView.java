@@ -1,16 +1,23 @@
 package com.hdgh0g.backend.views;
 
-public interface ProjectView {
+import com.hdgh0g.backend.domain.Project;
+import lombok.Getter;
+import lombok.Setter;
 
-    interface DefaultView extends
-            IdView,
-            TitleView,
-            DescriptionView,
-            ImageView {}
+@Getter
+@Setter
+public class ProjectView {
 
-    interface IdView {}
-    interface TitleView {}
-    interface DescriptionView {}
-    interface ImageView extends com.hdgh0g.backend.views.ImageView.DefaultView {}
+    private Long id;
+    private String title;
+    private String description;
+    private ImageView image;
+
+    public ProjectView(Project project) {
+        this.id = project.getId();
+        this.title = project.getTitle();
+        this.description = project.getDescription();
+        this.image = new ImageView(project.getImage());
+    }
 
 }

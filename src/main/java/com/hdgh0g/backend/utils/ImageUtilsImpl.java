@@ -1,6 +1,7 @@
 package com.hdgh0g.backend.utils;
 
 import com.hdgh0g.backend.domain.Image;
+import com.hdgh0g.backend.views.ImageView;
 import lombok.RequiredArgsConstructor;
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
@@ -36,7 +37,7 @@ public class ImageUtilsImpl implements ImageUtils {
 
     @PostConstruct
     public void loadData() {
-        Image.storagePrefix = storagePrefix;
+        ImageView.STORAGE_PREFIX = storagePrefix;
     }
 
     @Override

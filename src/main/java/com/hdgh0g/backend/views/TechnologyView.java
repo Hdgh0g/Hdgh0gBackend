@@ -1,13 +1,20 @@
 package com.hdgh0g.backend.views;
 
-public interface TechnologyView {
+import com.hdgh0g.backend.domain.Technology;
+import lombok.Getter;
+import lombok.Setter;
 
-    interface DefaultView extends
-            IdView,
-            CaptionView,
-            ImageView {}
+@Getter
+@Setter
+public class TechnologyView {
 
-    interface IdView {}
-    interface CaptionView {}
-    interface ImageView extends com.hdgh0g.backend.views.ImageView.DefaultView {}
+    private Long id;
+    private String caption;
+    private ImageView image;
+
+    public TechnologyView(Technology technology) {
+        this.id = technology.getId();
+        this.caption = technology.getCaption();
+        this.image = new ImageView(technology.getImage());
+    }
 }

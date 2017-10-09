@@ -1,7 +1,7 @@
 package com.hdgh0g.backend.services;
 
-import com.hdgh0g.backend.repositories.TechnologiesRepo;
 import com.hdgh0g.backend.domain.Technology;
+import com.hdgh0g.backend.repositories.TechnologiesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

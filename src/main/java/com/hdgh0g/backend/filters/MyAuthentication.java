@@ -1,4 +1,4 @@
-package com.hdgh0g.backend.utils.filters;
+package com.hdgh0g.backend.filters;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

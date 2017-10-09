@@ -1,15 +1,16 @@
 package com.hdgh0g.backend.controllers;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.collect.Lists;
 import com.hdgh0g.backend.domain.ImageWithCaption;
 import com.hdgh0g.backend.exceptions.ApiException;
 import com.hdgh0g.backend.exceptions.ServiceException;
 import com.hdgh0g.backend.services.ImageManager;
+import com.hdgh0g.backend.views.ImageView;
 import com.hdgh0g.backend.views.ImageWithCaptionView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +25,22 @@ public class ImageController {
 
     private final ImageManager imageManager;
 
+    @PostMapping
+    @Secured("ROLE_ADMIN")
+    public ImageView uploadImage(@RequestParam("image") MultipartFile file) throws ApiException {
+        try {
+            return new ImageView(imageManager.CreateImage(file));
+        } catch (ServiceException e) {
+            throw new ApiException(e);
+        }
+    }
+
     @PostMapping("/withCaption")
     @Secured("ROLE_ADMIN")
-    @JsonView(ImageWithCaptionView.DefaultView.class)
-    public ImageWithCaption uploadImageWithCaption(@RequestParam("image") MultipartFile file,
-                                                   @RequestParam("caption") String caption) throws ApiException {
+    public ImageWithCaptionView uploadImageWithCaption(@RequestParam("image") MultipartFile file,
+                                                       @RequestParam("caption") String caption) throws ApiException {
         try {
-            return imageManager.CreateImageWithCaption(file, caption);
+            return new ImageWithCaptionView(imageManager.CreateImageWithCaption(file, caption));
         } catch (ServiceException e) {
             throw new ApiException(e);
         }
@@ -44,8 +54,11 @@ public class ImageController {
     }
 
     @GetMapping("/withCaption")
-    @JsonView(ImageWithCaptionView.DefaultView.class)
-    public Page<ImageWithCaption> getAllImagesWithCaption(Pageable pageable) {
-        return imageManager.findAll(pageable);
+    public Page<ImageWithCaptionView> getAllImagesWithCaption(Pageable pageable) {
+        Page<ImageWithCaption> all = imageManager.findAll(pageable);
+        return new PageImpl<>(Lists.transform(
+                all.getContent(), ImageWithCaptionView::new),
+                all.getPageable(),
+                all.getTotalElements());
     }
 }

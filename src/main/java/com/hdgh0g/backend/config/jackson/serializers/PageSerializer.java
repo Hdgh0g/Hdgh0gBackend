@@ -1,4 +1,4 @@
-package com.hdgh0g.backend.utils.jackson;
+package com.hdgh0g.backend.config.jackson.serializers;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

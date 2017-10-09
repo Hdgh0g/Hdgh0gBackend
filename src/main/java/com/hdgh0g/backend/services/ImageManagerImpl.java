@@ -3,6 +3,7 @@ package com.hdgh0g.backend.services;
 import com.hdgh0g.backend.domain.Image;
 import com.hdgh0g.backend.domain.ImageWithCaption;
 import com.hdgh0g.backend.exceptions.ServiceException;
+import com.hdgh0g.backend.repositories.ImageRepo;
 import com.hdgh0g.backend.repositories.ImageWithCaptionRepo;
 import com.hdgh0g.backend.utils.ImageUtils;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,20 @@ import static com.hdgh0g.backend.exceptions.ServiceException.Reason.CANT_SAVE_IM
 public class ImageManagerImpl implements ImageManager {
 
     private final ImageWithCaptionRepo imageWithCaptionRepo;
+    private final ImageRepo imageRepo;
     private final ImageUtils imageUtils;
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Override
+    public Image CreateImage(MultipartFile file) throws ServiceException {
+        Image image;
+        try {
+            image = imageUtils.transformToImage(file);
+        } catch (IOException e) {
+            throw new ServiceException(CANT_SAVE_IMAGE);
+        }
+        return imageRepo.save(image);
+    }
 
     @Override
     public ImageWithCaption CreateImageWithCaption(MultipartFile file, String caption) throws ServiceException {
@@ -51,7 +64,7 @@ public class ImageManagerImpl implements ImageManager {
         try {
             imageWithCaptionRepo.deleteById(id);
         } catch (EmptyResultDataAccessException ignored) {
-            log.info("Removing not existing image with caption id = {}", id);
+            logger.info("Removing not existing image with caption id = {}", id);
         } //No problem. Just delete not existing image
     }
 }
