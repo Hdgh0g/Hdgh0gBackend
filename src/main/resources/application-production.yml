@@ -18,6 +18,6 @@ server:
 
 storage:
   prefix: http://static.hdgh0g.com/
-  directory: $/home/backend/storage
+  directory: /home/backend/storage
   filename:
     length: 32
