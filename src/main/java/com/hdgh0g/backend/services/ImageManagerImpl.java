@@ -34,7 +34,7 @@ public class ImageManagerImpl implements ImageManager {
         try {
             image = imageUtils.transformToImage(file);
         } catch (IOException e) {
-            throw new ServiceException(CANT_SAVE_IMAGE);
+            throw new ServiceException(CANT_SAVE_IMAGE, e);
         }
         return imageRepo.save(image);
     }

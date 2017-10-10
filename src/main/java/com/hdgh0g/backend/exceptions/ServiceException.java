@@ -4,11 +4,16 @@ package com.hdgh0g.backend.exceptions;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public class ServiceException extends Exception {
 
-    @Getter
-    final private Reason reason;
+    private final Reason reason;
+
+    public ServiceException(Reason reason, Exception exception) {
+        super(exception);
+        this.reason = reason;
+    }
 
     String getTitle() {
         return reason.getTitle();
@@ -28,7 +33,6 @@ public class ServiceException extends Exception {
     public enum Reason {
         NOT_AUTHORIZED("You are not authorized", "Check credentials"),
         CANT_SAVE_IMAGE("Cant save image", "Bad format or write error");
-
 
         private final String title;
         private final String description;
