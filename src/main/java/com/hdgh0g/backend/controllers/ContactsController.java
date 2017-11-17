@@ -26,17 +26,16 @@ public class ContactsController {
 
     @Secured("ROLE_ADMIN")
     @PostMapping
-    public List<ContactView> createContact(@RequestBody ContactRequest contactRequest) {
-        Contact contact = contactRequest.toContact();
+    public List<ContactView> createContact(@RequestBody ContactRequest request) {
+        Contact contact = request.toContact();
         List<Contact> contacts = contactsManager.createContactAndReturnList(contact);
         return Lists.transform(contacts, ContactView::new);
     }
 
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
-    public List<ContactView> createContact(@PathVariable Long id) {
-
-            List<Contact> contacts = contactsManager.delete(id);
+    public List<ContactView> deleteContact(@PathVariable Long id) {
+        List<Contact> contacts = contactsManager.delete(id);
         return Lists.transform(contacts, ContactView::new);
     }
 }
