@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.hdgh0g.backend.config.jackson.serializers.InstantSerializer;
 import com.hdgh0g.backend.config.jackson.serializers.PageSerializer;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 
@@ -14,14 +14,10 @@ import javax.annotation.PostConstruct;
 import java.time.Instant;
 
 @Configuration
+@RequiredArgsConstructor
 public class JacksonConfig {
 
     private final ObjectMapper objectMapper;
-
-    @Autowired
-    public JacksonConfig(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
 
     @PostConstruct
     public void setup() {

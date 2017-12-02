@@ -1,7 +1,7 @@
-package com.hdgh0g.backend.utils;
+package com.hdgh0g.backend.services;
 
 import java.io.IOException;
 
-public interface StorageUtils {
+public interface StorageService {
     String saveFile(byte[] bytes, String extension, String prefix) throws IOException;
 }

@@ -1,9 +1,9 @@
 package com.hdgh0g.backend.controllers;
 
 import com.google.common.collect.Lists;
-import com.hdgh0g.backend.services.ProjectsManager;
+import com.hdgh0g.backend.services.ProjectsService;
 import com.hdgh0g.backend.views.ProjectView;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,17 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/projects", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequiredArgsConstructor
 public class ProjectsController {
 
-    private final ProjectsManager projectsManager;
-
-    @Autowired
-    public ProjectsController(ProjectsManager projectsManager) {
-        this.projectsManager = projectsManager;
-    }
+    private final ProjectsService projectsService;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<ProjectView> getProjects() {
-        return Lists.transform(projectsManager.getProjects(), ProjectView::new);
+        return Lists.transform(projectsService.getProjects(), ProjectView::new);
     }
 }

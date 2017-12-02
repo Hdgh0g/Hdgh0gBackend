@@ -1,4 +1,4 @@
-package com.hdgh0g.backend.utils;
+package com.hdgh0g.backend.services;
 
 import com.hdgh0g.backend.domain.Image;
 import com.hdgh0g.backend.views.ImageView;
@@ -20,11 +20,11 @@ import java.util.concurrent.Future;
 
 @Component
 @RequiredArgsConstructor
-public class ImageUtilsImpl implements ImageUtils {
+public class AsyncMultipartImageTransformService implements MultipartImageTransformService {
 
-    private final StorageUtils storageUtils;
+    private final StorageService storageService;
     private final AsyncTaskExecutor taskExecutor;
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Value("${image.size.full}")
     private Integer fullSize;
@@ -62,7 +62,7 @@ public class ImageUtilsImpl implements ImageUtils {
         BufferedImage resized = Scalr.resize(image, size);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(resized, "jpg", baos);
-        log.info("Saving image");
-        return storageUtils.saveFile(baos.toByteArray(), ".jpg", "images");
+        logger.info("Saving image");
+        return storageService.saveFile(baos.toByteArray(), ".jpg", "images");
     }
 }

@@ -21,10 +21,8 @@ public class Image {
     @SequenceGenerator(name = SEQUENCE_NAME, sequenceName = SEQUENCE_NAME, allocationSize = 1)
     private Long id;
 
-    @NonNull
     private String url;
 
-    @NonNull
     private String thumbnailUrl;
 
 }

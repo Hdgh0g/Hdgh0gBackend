@@ -4,7 +4,7 @@ import com.hdgh0g.backend.config.PropertiesConfig;
 import com.hdgh0g.backend.config.SecurityConfig;
 import com.hdgh0g.backend.config.jackson.JacksonConfig;
 import com.hdgh0g.backend.exceptions.ServiceException;
-import com.hdgh0g.backend.services.AdminManager;
+import com.hdgh0g.backend.services.AdminService;
 import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
 import com.jayway.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +22,15 @@ import org.springframework.test.web.servlet.MockMvc;
 })
 public class TestMvcConfiguration {
 
-    @Autowired
-    private MockMvc mockMvc;
-
     @Bean
-    public AdminManager adminManager() {
-        return new AdminManager() {
-            @Override
-            public void checkPassword(String password) throws ServiceException {
-            }
+    public AdminService adminManager() {
+        return password -> {
         };
     }
 
     @Bean
     @Scope("prototype")
-    protected MockMvcRequestSpecification given() {
+    protected MockMvcRequestSpecification given(MockMvc mockMvc) {
         return RestAssuredMockMvc.given().mockMvc(mockMvc);
     }
 }

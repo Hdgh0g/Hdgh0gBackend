@@ -5,7 +5,6 @@ import com.hdgh0g.backend.domain.ImageWithCaption;
 import com.hdgh0g.backend.exceptions.ServiceException;
 import com.hdgh0g.backend.repositories.ImageRepo;
 import com.hdgh0g.backend.repositories.ImageWithCaptionRepo;
-import com.hdgh0g.backend.utils.ImageUtils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,18 +20,18 @@ import static com.hdgh0g.backend.exceptions.ServiceException.Reason.CANT_SAVE_IM
 
 @Service
 @RequiredArgsConstructor
-public class ImageManagerImpl implements ImageManager {
+public class ImageServiceImpl implements ImageService {
 
     private final ImageWithCaptionRepo imageWithCaptionRepo;
     private final ImageRepo imageRepo;
-    private final ImageUtils imageUtils;
+    private final MultipartImageTransformService multipartImageTransformService;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public Image CreateImage(MultipartFile file) throws ServiceException {
         Image image;
         try {
-            image = imageUtils.transformToImage(file);
+            image = multipartImageTransformService.transformToImage(file);
         } catch (IOException e) {
             throw new ServiceException(CANT_SAVE_IMAGE, e);
         }
@@ -43,7 +42,7 @@ public class ImageManagerImpl implements ImageManager {
     public ImageWithCaption CreateImageWithCaption(MultipartFile file, String caption) throws ServiceException {
         Image image;
         try {
-            image = imageUtils.transformToImage(file);
+            image = multipartImageTransformService.transformToImage(file);
         } catch (IOException e) {
             throw new ServiceException(CANT_SAVE_IMAGE);
         }

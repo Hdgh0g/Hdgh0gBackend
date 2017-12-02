@@ -3,7 +3,7 @@ package com.hdgh0g.backend.controllers;
 import com.google.common.collect.Lists;
 import com.hdgh0g.backend.domain.Contact;
 import com.hdgh0g.backend.request.ContactRequest;
-import com.hdgh0g.backend.services.ContactsManager;
+import com.hdgh0g.backend.services.ContactsService;
 import com.hdgh0g.backend.views.ContactView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -17,25 +17,25 @@ import java.util.List;
 @RequestMapping(path = "/contacts", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ContactsController {
 
-    private final ContactsManager contactsManager;
+    private final ContactsService contactsService;
 
     @GetMapping
     public List<ContactView> getContacts() {
-        return Lists.transform(contactsManager.getContacts(), ContactView::new);
+        return Lists.transform(contactsService.getContacts(), ContactView::new);
     }
 
     @Secured("ROLE_ADMIN")
     @PostMapping
     public List<ContactView> createContact(@RequestBody ContactRequest request) {
         Contact contact = request.toContact();
-        List<Contact> contacts = contactsManager.createContactAndReturnList(contact);
+        List<Contact> contacts = contactsService.createContactAndReturnList(contact);
         return Lists.transform(contacts, ContactView::new);
     }
 
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}")
     public List<ContactView> deleteContact(@PathVariable Long id) {
-        List<Contact> contacts = contactsManager.delete(id);
+        List<Contact> contacts = contactsService.delete(id);
         return Lists.transform(contacts, ContactView::new);
     }
 }

@@ -21,15 +21,15 @@ import static org.mockito.Mockito.doReturn;
 @RunWith(SpringRunner.class)
 @ContextHierarchy({
         @ContextConfiguration(classes = TestServiceConfiguration.class),
-        @ContextConfiguration(classes = ProjectsManagerTestConfiguration.class)
+        @ContextConfiguration(classes = ProjectsServiceImplTestConfiguration.class)
 })
-public class ProjectsManagerTest {
+public class ProjectsServiceImplTest {
 
     @MockBean
     private ProjectsRepo projectsRepo;
 
     @Autowired
-    private ProjectsManager projectsManager;
+    private ProjectsServiceImpl projectsManager;
 
     @Test
     public void TestProjectsCount() {

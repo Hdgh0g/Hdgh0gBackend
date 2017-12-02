@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
-public interface ImageManager {
+public interface ImageService {
     Image CreateImage(MultipartFile file) throws ServiceException;
 
     ImageWithCaption CreateImageWithCaption(MultipartFile file, String caption) throws ServiceException;

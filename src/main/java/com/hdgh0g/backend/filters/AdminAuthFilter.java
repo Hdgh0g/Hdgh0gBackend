@@ -1,7 +1,7 @@
 package com.hdgh0g.backend.filters;
 
 import com.hdgh0g.backend.exceptions.ServiceException;
-import com.hdgh0g.backend.services.AdminManager;
+import com.hdgh0g.backend.services.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
@@ -20,7 +20,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AdminAuthFilter extends OncePerRequestFilter {
 
-    private final AdminManager adminManager;
+    private final AdminService adminService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -48,7 +48,7 @@ public class AdminAuthFilter extends OncePerRequestFilter {
 
     private boolean isValid(String password) {
         try {
-            adminManager.checkPassword(password);
+            adminService.checkPassword(password);
             return true;
         } catch (ServiceException e) {
             return false;

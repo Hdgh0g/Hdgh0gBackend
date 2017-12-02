@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ContactsManager {
+public class ContactsServiceImpl implements ContactsService {
 
     private final ContactsRepo contactsRepo;
     private final Logger logger = LoggerFactory.getLogger(getClass());

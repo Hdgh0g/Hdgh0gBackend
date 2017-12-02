@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TechnologiesManager {
+public class TechnologiesServiceImpl implements TechnologiesService {
 
     private final TechnologiesRepo technologiesRepo;
     private final Logger logger = LoggerFactory.getLogger(getClass());

@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 @Service
-public class AdminManagerImpl implements AdminManager {
+public class AdminServiceImpl implements AdminService {
 
     @Value("${security.admin.password.raw:}")
     private String adminPassword;
@@ -20,7 +20,7 @@ public class AdminManagerImpl implements AdminManager {
     @Value("${security.admin.password.file:}")
     private String adminPasswordFile;
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @PostConstruct
     public void init() {
@@ -28,7 +28,7 @@ public class AdminManagerImpl implements AdminManager {
             try {
                 adminPassword = Files.lines(new File(adminPasswordFile).toPath()).findFirst().orElse(adminPassword);
             } catch (IOException e) {
-                log.error("Error while trying to read admin password file " + adminPasswordFile, e);
+                logger.error("Error while trying to read admin password file " + adminPasswordFile, e);
                 throw new RuntimeException(e);
             }
         }

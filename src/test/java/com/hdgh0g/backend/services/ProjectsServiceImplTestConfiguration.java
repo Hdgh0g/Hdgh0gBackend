@@ -5,10 +5,10 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
 @TestConfiguration
-public class ProjectsManagerTestConfiguration {
+public class ProjectsServiceImplTestConfiguration {
 
     @Bean
-    public ProjectsManager projectsManager(ProjectsRepo pr) {
-        return new ProjectsManager(pr);
+    public ProjectsServiceImpl projectsService(ProjectsRepo pr) {
+        return new ProjectsServiceImpl(pr);
     }
 }

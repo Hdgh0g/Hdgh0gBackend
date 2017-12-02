@@ -1,4 +1,4 @@
-package com.hdgh0g.backend.utils;
+package com.hdgh0g.backend.services;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +11,7 @@ import static java.io.File.separator;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 @Component
-public class StorageUtilsImpl implements StorageUtils {
+public class LocalStorageService implements StorageService {
 
     @Value("${storage.filename.length}")
     private int count;

@@ -10,7 +10,8 @@ import javax.persistence.*;
 @Setter
 @ToString(of = {"id", "title", "description"})
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Project {
 
     public static final String SEQUENCE_NAME = "projects_id_seq";
@@ -20,14 +21,11 @@ public class Project {
     @SequenceGenerator(name = SEQUENCE_NAME, sequenceName = SEQUENCE_NAME, allocationSize = 1)
     private Long id;
 
-    @NonNull
     private String title;
 
-    @NonNull
     private String description;
 
     @ManyToOne
-    @NonNull
     private Image image;
 
 }

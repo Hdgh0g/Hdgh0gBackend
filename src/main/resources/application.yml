@@ -7,6 +7,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
   datasource:
     username: app_user
     password: q1w2e3sedama
