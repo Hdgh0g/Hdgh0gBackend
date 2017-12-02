@@ -13,6 +13,7 @@ public class ProjectsServiceImpl implements ProjectsService {
 
     private final ProjectsRepo projectsRepo;
 
+    @Override
     public List<Project> getProjects() {
         return projectsRepo.findAll();
     }

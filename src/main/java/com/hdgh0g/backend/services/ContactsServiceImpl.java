@@ -17,15 +17,18 @@ public class ContactsServiceImpl implements ContactsService {
     private final ContactsRepo contactsRepo;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Override
     public List<Contact> getContacts() {
         return contactsRepo.findAll();
     }
 
+    @Override
     public List<Contact> createContactAndReturnList(Contact contact) {
         contactsRepo.save(contact);
         return getContacts();
     }
 
+    @Override
     public List<Contact> delete(Long id) {
         try {
             contactsRepo.deleteById(id);

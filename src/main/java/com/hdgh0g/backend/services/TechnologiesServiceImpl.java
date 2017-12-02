@@ -17,15 +17,18 @@ public class TechnologiesServiceImpl implements TechnologiesService {
     private final TechnologiesRepo technologiesRepo;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Override
     public List<Technology> getTechnologies() {
         return technologiesRepo.findAll();
     }
 
+    @Override
     public List<Technology> createTechnologyAndReturnList(Technology technology) {
         technologiesRepo.save(technology);
         return getTechnologies();
     }
 
+    @Override
     public List<Technology> delete(Long id) {
         try {
             technologiesRepo.deleteById(id);
