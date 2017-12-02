@@ -1,8 +1,8 @@
 package com.hdgh0g.backend.controllers;
 
 import com.hdgh0g.backend.exceptions.ApiException;
-import com.hdgh0g.backend.exceptions.ServiceException;
 import com.hdgh0g.backend.services.AdminService;
+import com.hdgh0g.backend.utils.ControllerUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,10 +21,6 @@ public class AdminController {
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void login(String password) throws ApiException {
-        try {
-            adminService.checkPassword(password);
-        } catch (ServiceException e) {
-            throw new ApiException(e);
-        }
+        ControllerUtils.getOrThrowApiException(() -> adminService.checkPassword(password));
     }
 }

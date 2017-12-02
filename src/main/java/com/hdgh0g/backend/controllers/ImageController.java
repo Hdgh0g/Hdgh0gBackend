@@ -3,8 +3,8 @@ package com.hdgh0g.backend.controllers;
 import com.google.common.collect.Lists;
 import com.hdgh0g.backend.domain.ImageWithCaption;
 import com.hdgh0g.backend.exceptions.ApiException;
-import com.hdgh0g.backend.exceptions.ServiceException;
 import com.hdgh0g.backend.services.ImageService;
+import com.hdgh0g.backend.utils.ControllerUtils;
 import com.hdgh0g.backend.views.ImageView;
 import com.hdgh0g.backend.views.ImageWithCaptionView;
 import lombok.RequiredArgsConstructor;
@@ -28,22 +28,15 @@ public class ImageController {
     @PostMapping
     @Secured("ROLE_ADMIN")
     public ImageView uploadImage(@RequestParam("image") MultipartFile file) throws ApiException {
-        try {
-            return new ImageView(imageService.CreateImage(file));
-        } catch (ServiceException e) {
-            throw new ApiException(e);
-        }
+        return ControllerUtils.getOrThrowApiException(() -> new ImageView(imageService.CreateImage(file)));
     }
 
     @PostMapping("/withCaption")
     @Secured("ROLE_ADMIN")
     public ImageWithCaptionView uploadImageWithCaption(@RequestParam("image") MultipartFile file,
                                                        @RequestParam("caption") String caption) throws ApiException {
-        try {
-            return new ImageWithCaptionView(imageService.CreateImageWithCaption(file, caption));
-        } catch (ServiceException e) {
-            throw new ApiException(e);
-        }
+        return ControllerUtils.getOrThrowApiException(() ->
+                new ImageWithCaptionView(imageService.CreateImageWithCaption(file, caption)));
     }
 
     @DeleteMapping("/withCaption/{id}")

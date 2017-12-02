@@ -39,7 +39,7 @@ public class ProjectsControllerTest {
         Mockito.doReturn(randomProjects).when(projectsService).getProjects();
 
         given.when()
-                .get("/projects")
+                .get(ProjectsController.PATH)
                 .then()
                 .log().body()
                 .assertThat(status().isOk());

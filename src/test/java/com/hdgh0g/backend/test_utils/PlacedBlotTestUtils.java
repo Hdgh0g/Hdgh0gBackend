@@ -21,6 +21,14 @@ public final class PlacedBlotTestUtils {
                 .build());
     }
 
+    public static PlacedBlot randomBlot() {
+        return PlacedBlot.builder()
+                .id(Math.abs(ThreadLocalRandom.current().nextLong()))
+                .blotImage(BlotImageTestUtils.randomImage())
+                .position(randomPosition())
+                .build();
+    }
+
     public static Position randomPosition() {
         return new Position(
                 ThreadLocalRandom.current().nextDouble(0, 100),

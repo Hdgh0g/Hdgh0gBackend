@@ -1,10 +1,7 @@
 package com.hdgh0g.backend.domain.game;
 
 import com.hdgh0g.backend.domain.Image;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
@@ -15,11 +12,13 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @ToString(of = {"id", "image"})
 public class MainImage {
 
     private static final String SEQUENCE_NAME = "main_images_id_seq";
-    private static final int SIZE_TO_SHOW = 10;
+    public static final int SIZE_TO_SHOW = 10;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)

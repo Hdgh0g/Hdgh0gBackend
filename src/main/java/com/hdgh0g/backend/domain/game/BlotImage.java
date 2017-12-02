@@ -1,10 +1,7 @@
 package com.hdgh0g.backend.domain.game;
 
 import com.hdgh0g.backend.domain.Image;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,6 +10,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @ToString(of = {"id", "image"})
 public class BlotImage {
 

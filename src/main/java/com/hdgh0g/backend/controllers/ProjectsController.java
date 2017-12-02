@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/projects", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path = ProjectsController.PATH, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @RequiredArgsConstructor
 public class ProjectsController {
 
+    public static final String PATH = "/projects";
     private final ProjectsService projectsService;
 
     @RequestMapping(method = RequestMethod.GET)
