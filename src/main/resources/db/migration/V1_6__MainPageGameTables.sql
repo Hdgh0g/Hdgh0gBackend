@@ -1,0 +1,20 @@
+CREATE TABLE main_images
+(
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  image_id BIGINT REFERENCES images NOT NULL
+);
+
+CREATE TABLE blot_images
+(
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  image_id BIGINT REFERENCES images NOT NULL
+);
+
+CREATE TABLE placed_blots
+(
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  x FLOAT NOT NULL,
+  y FLOAT NOT NULL,
+  blot_image_id BIGINT REFERENCES blot_images NOT NULL,
+  main_image_id BIGINT REFERENCES main_images NOT NULL
+)

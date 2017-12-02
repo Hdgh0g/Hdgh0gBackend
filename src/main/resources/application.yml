@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: local
   main:
     banner-mode: "off"
   mvc:
@@ -9,8 +7,30 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  datasource:
+    username: app_user
+    password: q1w2e3sedama
+    url: jdbc:postgresql://localhost:5432/hdgh0g
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
 
 image:
   size:
     full: 1500
     thumb: 500
+
+security:
+  admin:
+    password:
+      raw: 123456
+
+server:
+  port: 9000
+
+storage:
+  prefix: http://localhost/
+  directory: ${user.home}\Dropbox\Usefull\hdgh0g_static
+  filename:
+    length: 32

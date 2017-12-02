@@ -15,9 +15,11 @@ import javax.persistence.*;
 @ToString(of = {"id", "title", "description"})
 public class Contact {
 
+    private static final String SEQUENCE_NAME = "contacts_id_seq";
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contacts_id_seq")
-    @SequenceGenerator(name = "contacts_id_seq", sequenceName = "contacts_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
+    @SequenceGenerator(name = SEQUENCE_NAME, sequenceName = SEQUENCE_NAME, allocationSize = 1)
     private Long id;
 
     private String title;

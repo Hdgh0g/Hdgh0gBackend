@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.0.M6'
+        springBootVersion = '2.0.0.M7'
     }
     repositories {
         mavenCentral()
@@ -52,6 +52,7 @@ dependencies {
 
     runtime('org.postgresql:postgresql')
     compileOnly('org.projectlombok:lombok')
+    testCompileOnly('org.projectlombok:lombok')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     // https://mvnrepository.com/artifact/com.jayway.restassured/rest-assured

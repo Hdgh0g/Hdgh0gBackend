@@ -1,20 +1,22 @@
-package com.hdgh0g.backend.domain;
+package com.hdgh0g.backend.domain.game;
 
-import lombok.*;
+import com.hdgh0g.backend.domain.Image;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "images_with_caption")
+@Table(name = "blot_images")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @ToString(of = {"id", "image"})
-public class ImageWithCaption {
+public class BlotImage {
 
-    public static final String SEQUENCE_NAME = "images_with_caption_id_seq";
+    private static final String SEQUENCE_NAME = "blot_images_id_seq";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_NAME)
@@ -23,6 +25,4 @@ public class ImageWithCaption {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Image image;
-
-    private String caption;
 }
