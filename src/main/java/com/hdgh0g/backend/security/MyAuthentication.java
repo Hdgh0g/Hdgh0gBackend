@@ -1,4 +1,4 @@
-package com.hdgh0g.backend.filters;
+package com.hdgh0g.backend.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,13 +7,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-class MyAuthentication implements Authentication {
+public class MyAuthentication implements Authentication {
 
     private boolean isAuthenticated = true;
 
     private List<GrantedAuthority> authorities;
 
-    MyAuthentication(GrantedAuthority... authority) {
+    public MyAuthentication(GrantedAuthority... authority) {
         this.authorities = Arrays.asList(authority);
     }
 

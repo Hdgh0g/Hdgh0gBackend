@@ -15,4 +15,6 @@ public interface ImageService {
     Page<ImageWithCaption> findAll(Pageable pageable);
 
     void deleteImageWithCaption(Long id);
+
+    void checkImageExists(Long id) throws ServiceException;
 }

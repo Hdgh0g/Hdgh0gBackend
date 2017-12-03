@@ -3,6 +3,7 @@ package com.hdgh0g.backend.controllers;
 import com.google.common.collect.Lists;
 import com.hdgh0g.backend.domain.Contact;
 import com.hdgh0g.backend.request.ContactRequest;
+import com.hdgh0g.backend.security.Roles;
 import com.hdgh0g.backend.services.ContactsService;
 import com.hdgh0g.backend.views.ContactView;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class ContactsController {
         return Lists.transform(contactsService.getContacts(), ContactView::new);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured(Roles.ADMIN)
     @PostMapping
     public List<ContactView> createContact(@RequestBody ContactRequest request) {
         Contact contact = request.toContact();
@@ -32,7 +33,7 @@ public class ContactsController {
         return Lists.transform(contacts, ContactView::new);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured(Roles.ADMIN)
     @DeleteMapping("/{id}")
     public List<ContactView> deleteContact(@PathVariable Long id) {
         List<Contact> contacts = contactsService.delete(id);

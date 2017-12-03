@@ -33,7 +33,9 @@ public class ServiceException extends Exception {
     public enum Reason {
         NOT_AUTHORIZED("You are not authorized", "Check credentials"),
         CANT_SAVE_IMAGE("Cant save image", "Bad format or write error"),
-        MAIN_IMAGE_NOT_SET("Main image not set", "You should set up main image");
+        MAIN_IMAGE_NOT_SET("Main image not set", "You should set up main image"),
+        IMAGE_NOT_EXISTS("Image not exists", "There is no image in DB"),
+        BLOT_IMAGE_NOT_EXISTS("Blot image not exists", "There is no image in DB");
 
         private final String title;
         private final String description;

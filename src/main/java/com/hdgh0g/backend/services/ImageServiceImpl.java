@@ -66,4 +66,12 @@ public class ImageServiceImpl implements ImageService {
             logger.info("Removing not existing image with caption id = {}", id);
         } //No problem. Just delete not existing image
     }
+
+    @Override
+    public void checkImageExists(Long id) throws ServiceException {
+        if (!imageWithCaptionRepo.existsById(id)) {
+            logger.error("Checked not existing image with id " + id);
+            throw new ServiceException(ServiceException.Reason.IMAGE_NOT_EXISTS);
+        }
+    }
 }

@@ -1,14 +1,13 @@
 package com.hdgh0g.backend.request;
 
-import com.hdgh0g.backend.domain.Image;
+import com.hdgh0g.backend.domain.game.BlotImage;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
-
-public class ImageRequest {
+public class BlotImageRequest {
 
     @Getter
     @Setter
@@ -18,12 +17,11 @@ public class ImageRequest {
         @NotNull
         private Long id;
 
-        public Image toImage() {
-            Image image = new Image();
-            image.setId(id);
-            return image;
+        public BlotImage toBlotImage() {
+            return BlotImage.builder()
+                    .id(id)
+                    .build();
         }
 
     }
-
 }

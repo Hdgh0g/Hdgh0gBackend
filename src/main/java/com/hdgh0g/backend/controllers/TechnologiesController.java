@@ -3,6 +3,7 @@ package com.hdgh0g.backend.controllers;
 import com.google.common.collect.Lists;
 import com.hdgh0g.backend.domain.Technology;
 import com.hdgh0g.backend.request.TechnologyRequest;
+import com.hdgh0g.backend.security.Roles;
 import com.hdgh0g.backend.services.TechnologiesService;
 import com.hdgh0g.backend.views.TechnologyView;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class TechnologiesController {
         return Lists.transform(technologiesService.getTechnologies(), TechnologyView::new);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured(Roles.ADMIN)
     @PostMapping
     public List<TechnologyView> createTechnology(@RequestBody TechnologyRequest request) {
         Technology technology = request.toTechnology();
@@ -32,7 +33,7 @@ public class TechnologiesController {
         return Lists.transform(technologies, TechnologyView::new);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured(Roles.ADMIN)
     @DeleteMapping("/{id}")
     public List<TechnologyView> deleteTechnology(@PathVariable Long id){
         List<Technology> technologies = technologiesService.delete(id);

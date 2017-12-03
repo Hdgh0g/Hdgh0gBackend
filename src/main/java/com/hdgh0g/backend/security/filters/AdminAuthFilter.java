@@ -1,6 +1,8 @@
-package com.hdgh0g.backend.filters;
+package com.hdgh0g.backend.security.filters;
 
 import com.hdgh0g.backend.exceptions.ServiceException;
+import com.hdgh0g.backend.security.MyAuthentication;
+import com.hdgh0g.backend.security.Roles;
 import com.hdgh0g.backend.services.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +32,7 @@ public class AdminAuthFilter extends OncePerRequestFilter {
         String headerAuthorization = request.getHeader("Authorization");
         Authentication auth;
         if (StringUtils.isBlank(headerAuthorization)) {
-            auth = new MyAuthentication(new SimpleGrantedAuthority("ROLE_ANON"));
+            auth = new MyAuthentication(new SimpleGrantedAuthority(Roles.ANONYMOUS));
         } else {
 
             String password = headerAuthorization.replace("Bearer", "").trim();
@@ -39,7 +41,7 @@ public class AdminAuthFilter extends OncePerRequestFilter {
                 request.getRequestDispatcher( "/error/badAdminPassword").forward(request, response);
             }
 
-            auth = new MyAuthentication(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            auth = new MyAuthentication(new SimpleGrantedAuthority(Roles.ADMIN));
         }
 
         SecurityContextHolder.getContext().setAuthentication(auth);

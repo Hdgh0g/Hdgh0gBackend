@@ -2,9 +2,14 @@ package com.hdgh0g.backend.controllers;
 
 import com.hdgh0g.backend.domain.game.MainImage;
 import com.hdgh0g.backend.exceptions.ServiceException;
+import com.hdgh0g.backend.request.ImageRequest;
 import com.hdgh0g.backend.services.MainImageService;
+import com.hdgh0g.backend.services.PlacedBlotService;
 import com.hdgh0g.backend.test_utils.MainImageTestUtils;
+import com.hdgh0g.backend.test_utils.RandomTestUtils;
+import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -20,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = MainPageGameController.class)
 @ContextConfiguration(classes = TestMvcConfiguration.class)
+@MockBean(PlacedBlotService.class)
 public class MainPageGameControllerTest {
 
     @Autowired
@@ -51,5 +57,19 @@ public class MainPageGameControllerTest {
                 .log().body()
                 .assertThat(status().isOk())
                 .body("blots", hasSize(MainImage.SIZE_TO_SHOW));
+    }
+
+    @Test
+    @Ignore
+    public void testChangeMainImage() {
+        ImageRequest.Id request = new ImageRequest.Id();
+        request.setId(RandomTestUtils.randomId());
+        given.body(request)
+                .contentType(ContentType.JSON)
+                .when()
+                .post(MainPageGameController.PATH)
+                .then()
+                .log().body()
+                .assertThat(status().isCreated());
     }
 }

@@ -4,6 +4,7 @@ import com.hdgh0g.backend.exceptions.ApiException;
 import com.hdgh0g.backend.exceptions.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,7 +17,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiException> handleException(AccessDeniedException e) {
-        ApiException apiException = new ApiException(new ServiceException(ServiceException.Reason.NOT_AUTHORIZED));
+        ServiceException serviceException = new ServiceException(ServiceException.Reason.NOT_AUTHORIZED, e);
+        ApiException apiException = new ApiException(serviceException, HttpStatus.UNAUTHORIZED);
         return handleApiException(apiException);
     }
 
