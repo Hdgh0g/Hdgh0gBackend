@@ -1,11 +1,10 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.0.M7'
+        springBootVersion = '2.0.0.RELEASE'
+        restAssuredVersioon = '3.0.7'
     }
     repositories {
         mavenCentral()
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -17,7 +16,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
 
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = 9
 
 bootJar {
     launchScript()
@@ -29,8 +28,6 @@ task wrapper(type: Wrapper) {
 
 repositories {
     mavenCentral()
-    maven { url "https://repo.spring.io/snapshot" }
-    maven { url "https://repo.spring.io/milestone" }
 }
 
 dependencies {
@@ -39,7 +36,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-validation')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.retry:spring-retry')
     compile('org.flywaydb:flyway-core')
     // https://mvnrepository.com/artifact/com.google.guava/guava
     compile group: 'com.google.guava', name: 'guava', version: '23.0'
@@ -55,8 +51,9 @@ dependencies {
     testCompileOnly('org.projectlombok:lombok')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    // https://mvnrepository.com/artifact/com.jayway.restassured/rest-assured
-    testCompile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.9.0'
-    // https://mvnrepository.com/artifact/com.jayway.restassured/spring-mock-mvc
-    testCompile group: 'com.jayway.restassured', name: 'spring-mock-mvc', version: '2.9.0'
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: restAssuredVersioon
+    // https://mvnrepository.com/artifact/io.rest-assured/spring-mock-mvc
+    compile group: 'io.rest-assured', name: 'spring-mock-mvc', version: restAssuredVersioon
+
 }
