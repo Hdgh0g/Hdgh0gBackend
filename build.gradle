@@ -22,8 +22,8 @@ bootJar {
     launchScript()
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.6'
+wrapper {
+    gradleVersion = '4.9'
 }
 
 repositories {
