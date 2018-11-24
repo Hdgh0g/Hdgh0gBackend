@@ -4,6 +4,7 @@ import com.hdgh0g.backend.domain.game.PlacedBlot;
 import com.hdgh0g.backend.domain.game.Position;
 import com.hdgh0g.backend.test_utils.MainImageTestUtils;
 import com.hdgh0g.backend.test_utils.PlacedBlotTestUtils;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +16,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureEmbeddedDatabase
 public class PlacedBlotRepoTest {
 
     @Autowired

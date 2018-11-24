@@ -6,6 +6,7 @@ import com.hdgh0g.backend.domain.game.PlacedBlot;
 import com.hdgh0g.backend.test_utils.MainImageTestUtils;
 import com.hdgh0g.backend.test_utils.PlacedBlotTestUtils;
 import com.hdgh0g.backend.test_utils.matchers.OrderMatcher;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,11 +22,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureEmbeddedDatabase
 public class MainImageRepoTest {
 
     @Autowired
