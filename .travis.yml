@@ -1,6 +1,5 @@
 language: java
-services:
-  - postgresql
+jdk: openjdk11
 addons:
   ssh_known_hosts: hdgh0g.com
 before_install:

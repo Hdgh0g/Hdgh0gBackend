@@ -1,6 +1,7 @@
 package com.hdgh0g.backend.repositories;
 
 import com.hdgh0g.backend.domain.Project;
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,11 @@ import java.util.stream.IntStream;
 import static com.hdgh0g.backend.test_utils.ProjectTestUtils.randomProject;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureEmbeddedDatabase
 public class ProjectsRepoTest {
 
     @Autowired

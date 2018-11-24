@@ -1,9 +1,3 @@
-spring:
-  datasource:
-    username: test_user
-    password: q1w2e3sedama
-    url: jdbc:postgresql://localhost:5432/hdgh0g_test
-
 storage:
   prefix: file://${java.io.tmpdir}hdgh0g_tests/
   directory: ${java.io.tmpdir}hdgh0g_tests

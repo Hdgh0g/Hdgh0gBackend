@@ -3,7 +3,7 @@ package com.hdgh0g.backend.controllers;
 import com.hdgh0g.backend.domain.Project;
 import com.hdgh0g.backend.services.ProjectsService;
 import com.hdgh0g.backend.test_utils.ProjectTestUtils;
-import com.jayway.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
+import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
