@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.3.RELEASE'
+        springBootVersion = '2.1.0.RELEASE'
         restAssuredVersioon = '3.0.7'
     }
     repositories {
@@ -16,14 +16,14 @@ apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
 
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 10
+sourceCompatibility = 11
 
 bootJar {
     launchScript()
 }
 
 wrapper {
-    gradleVersion = '4.9'
+    gradleVersion = '4.10.2'
 }
 
 repositories {
@@ -31,29 +31,31 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-cache')
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.boot:spring-boot-starter-validation')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.flywaydb:flyway-core')
+    implementation('org.springframework.boot:spring-boot-starter-cache')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.flywaydb:flyway-core')
     // https://mvnrepository.com/artifact/com.google.guava/guava
-    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    implementation group: 'com.google.guava', name: 'guava', version: '23.0'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
     // https://mvnrepository.com/artifact/commons-io/commons-io
-    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.5'
     // https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib
-    compile group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+    implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
 
-    runtime('org.postgresql:postgresql')
+    runtimeOnly('org.postgresql:postgresql')
+    annotationProcessor('org.projectlombok:lombok')
     compileOnly('org.projectlombok:lombok')
-    testCompileOnly('org.projectlombok:lombok')
 
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
     // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
-    testCompile group: 'io.rest-assured', name: 'rest-assured', version: restAssuredVersioon
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: restAssuredVersioon
     // https://mvnrepository.com/artifact/io.rest-assured/spring-mock-mvc
-    compile group: 'io.rest-assured', name: 'spring-mock-mvc', version: restAssuredVersioon
+    testImplementation group: 'io.rest-assured', name: 'spring-mock-mvc', version: restAssuredVersioon
 
+    testAnnotationProcessor('org.projectlombok:lombok')
+    testCompileOnly('org.projectlombok:lombok')
 }
